@@ -26,13 +26,14 @@ class SearchResultSet extends Entity
 
     /**
     * Gets the hitsContainers
+    * A collection of search results.
     *
-    * @return SearchHitsContainer The hitsContainers
+    * @return SearchHitsContainer|null The hitsContainers
     */
     public function getHitsContainers()
     {
         if (array_key_exists("hitsContainers", $this->_propDict)) {
-            if (is_a($this->_propDict["hitsContainers"], "\Beta\Microsoft\Graph\Model\SearchHitsContainer")) {
+            if (is_a($this->_propDict["hitsContainers"], "\Beta\Microsoft\Graph\Model\SearchHitsContainer") || is_null($this->_propDict["hitsContainers"])) {
                 return $this->_propDict["hitsContainers"];
             } else {
                 $this->_propDict["hitsContainers"] = new SearchHitsContainer($this->_propDict["hitsContainers"]);
@@ -44,6 +45,7 @@ class SearchResultSet extends Entity
 
     /**
     * Sets the hitsContainers
+    * A collection of search results.
     *
     * @param SearchHitsContainer $val The value to assign to the hitsContainers
     *
@@ -54,10 +56,44 @@ class SearchResultSet extends Entity
         $this->_propDict["hitsContainers"] = $val;
          return $this;
     }
+
+    /**
+    * Gets the resultTemplates
+    * A dictionary of resultTemplateIds and associated values, which include the name and JSON schema of the result templates.
+    *
+    * @return ResultTemplateDictionary|null The resultTemplates
+    */
+    public function getResultTemplates()
+    {
+        if (array_key_exists("resultTemplates", $this->_propDict)) {
+            if (is_a($this->_propDict["resultTemplates"], "\Beta\Microsoft\Graph\Model\ResultTemplateDictionary") || is_null($this->_propDict["resultTemplates"])) {
+                return $this->_propDict["resultTemplates"];
+            } else {
+                $this->_propDict["resultTemplates"] = new ResultTemplateDictionary($this->_propDict["resultTemplates"]);
+                return $this->_propDict["resultTemplates"];
+            }
+        }
+        return null;
+    }
+
+    /**
+    * Sets the resultTemplates
+    * A dictionary of resultTemplateIds and associated values, which include the name and JSON schema of the result templates.
+    *
+    * @param ResultTemplateDictionary $val The value to assign to the resultTemplates
+    *
+    * @return SearchResultSet The SearchResultSet
+    */
+    public function setResultTemplates($val)
+    {
+        $this->_propDict["resultTemplates"] = $val;
+         return $this;
+    }
     /**
     * Gets the searchTerms
+    * Contains the search terms sent in the initial search query.
     *
-    * @return string The searchTerms
+    * @return string|null The searchTerms
     */
     public function getSearchTerms()
     {
@@ -70,6 +106,7 @@ class SearchResultSet extends Entity
 
     /**
     * Sets the searchTerms
+    * Contains the search terms sent in the initial search query.
     *
     * @param string $val The value of the searchTerms
     *

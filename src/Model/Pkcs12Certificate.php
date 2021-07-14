@@ -26,9 +26,11 @@ class Pkcs12Certificate extends ApiAuthenticationConfigurationBase
     /**
     * Set the @odata.type since this type is immediately descended from an abstract
     * type that is referenced as the type in an entity.
+    * @param array $propDict The property dictionary
     */
-    public function __construct()
+    public function __construct($propDict = array())
     {
+        parent::__construct($propDict);
         $this->setODataType("#microsoft.graph.pkcs12Certificate");
     }
 
@@ -36,7 +38,7 @@ class Pkcs12Certificate extends ApiAuthenticationConfigurationBase
     * Gets the password
     * This is the password for the pfx file. Required. If no password is used, must still provide a value of ''.
     *
-    * @return string The password
+    * @return string|null The password
     */
     public function getPassword()
     {
@@ -64,7 +66,7 @@ class Pkcs12Certificate extends ApiAuthenticationConfigurationBase
     * Gets the pkcs12Value
     * This is the field for sending pfx content. The value should be a base-64 encoded version of the actual certificate content. Required.
     *
-    * @return string The pkcs12Value
+    * @return string|null The pkcs12Value
     */
     public function getPkcs12Value()
     {

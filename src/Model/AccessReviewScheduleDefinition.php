@@ -26,14 +26,14 @@ class AccessReviewScheduleDefinition extends Entity
 {
     /**
     * Gets the createdBy
-    * User who created this review.
+    * User who created this review. Read-only.
     *
-    * @return UserIdentity The createdBy
+    * @return UserIdentity|null The createdBy
     */
     public function getCreatedBy()
     {
         if (array_key_exists("createdBy", $this->_propDict)) {
-            if (is_a($this->_propDict["createdBy"], "\Microsoft\Graph\Model\UserIdentity")) {
+            if (is_a($this->_propDict["createdBy"], "\Microsoft\Graph\Model\UserIdentity") || is_null($this->_propDict["createdBy"])) {
                 return $this->_propDict["createdBy"];
             } else {
                 $this->_propDict["createdBy"] = new UserIdentity($this->_propDict["createdBy"]);
@@ -45,7 +45,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the createdBy
-    * User who created this review.
+    * User who created this review. Read-only.
     *
     * @param UserIdentity $val The createdBy
     *
@@ -59,14 +59,14 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Gets the createdDateTime
-    * Timestamp when review series was created.
+    * Timestamp when the access review series was created. Supports $select. Read-only.
     *
-    * @return \DateTime The createdDateTime
+    * @return \DateTime|null The createdDateTime
     */
     public function getCreatedDateTime()
     {
         if (array_key_exists("createdDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["createdDateTime"], "\DateTime")) {
+            if (is_a($this->_propDict["createdDateTime"], "\DateTime") || is_null($this->_propDict["createdDateTime"])) {
                 return $this->_propDict["createdDateTime"];
             } else {
                 $this->_propDict["createdDateTime"] = new \DateTime($this->_propDict["createdDateTime"]);
@@ -78,7 +78,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the createdDateTime
-    * Timestamp when review series was created.
+    * Timestamp when the access review series was created. Supports $select. Read-only.
     *
     * @param \DateTime $val The createdDateTime
     *
@@ -92,9 +92,9 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Gets the descriptionForAdmins
-    * Description provided by review creators to provide more context of the review to admins.
+    * Description provided by review creators to provide more context of the review to admins. Supports $select.
     *
-    * @return string The descriptionForAdmins
+    * @return string|null The descriptionForAdmins
     */
     public function getDescriptionForAdmins()
     {
@@ -107,7 +107,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the descriptionForAdmins
-    * Description provided by review creators to provide more context of the review to admins.
+    * Description provided by review creators to provide more context of the review to admins. Supports $select.
     *
     * @param string $val The descriptionForAdmins
     *
@@ -121,9 +121,9 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Gets the descriptionForReviewers
-    * Description provided  by review creators to provide more context of the review to reviewers. Reviewers will see this description in the email sent to them requesting their review.
+    * Description provided  by review creators to provide more context of the review to reviewers. Reviewers will see this description in the email sent to them requesting their review. Supports $select.
     *
-    * @return string The descriptionForReviewers
+    * @return string|null The descriptionForReviewers
     */
     public function getDescriptionForReviewers()
     {
@@ -136,7 +136,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the descriptionForReviewers
-    * Description provided  by review creators to provide more context of the review to reviewers. Reviewers will see this description in the email sent to them requesting their review.
+    * Description provided  by review creators to provide more context of the review to reviewers. Reviewers will see this description in the email sent to them requesting their review. Supports $select.
     *
     * @param string $val The descriptionForReviewers
     *
@@ -150,9 +150,9 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Gets the displayName
-    * Name of access review series. Required on create.
+    * Name of the access review series. Supports $select and $orderBy. Required on create.
     *
-    * @return string The displayName
+    * @return string|null The displayName
     */
     public function getDisplayName()
     {
@@ -165,7 +165,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the displayName
-    * Name of access review series. Required on create.
+    * Name of the access review series. Supports $select and $orderBy. Required on create.
     *
     * @param string $val The displayName
     *
@@ -180,8 +180,9 @@ class AccessReviewScheduleDefinition extends Entity
 
      /** 
      * Gets the fallbackReviewers
+    * This collection of reviewer scopes is used to define the list of fallback reviewers. These fallback reviewers will be notified to take action if no users are found from the list of reviewers specified. This could occur when either the group owner is specified as the reviewer but the group owner does not exist, or manager is specified as reviewer but a user's manager does not exist. See accessReviewReviewerScope. Replaces backupReviewers. Supports $select.
      *
-     * @return array The fallbackReviewers
+     * @return array|null The fallbackReviewers
      */
     public function getFallbackReviewers()
     {
@@ -194,6 +195,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /** 
     * Sets the fallbackReviewers
+    * This collection of reviewer scopes is used to define the list of fallback reviewers. These fallback reviewers will be notified to take action if no users are found from the list of reviewers specified. This could occur when either the group owner is specified as the reviewer but the group owner does not exist, or manager is specified as reviewer but a user's manager does not exist. See accessReviewReviewerScope. Replaces backupReviewers. Supports $select.
     *
     * @param AccessReviewReviewerScope $val The fallbackReviewers
     *
@@ -201,20 +203,20 @@ class AccessReviewScheduleDefinition extends Entity
     */
     public function setFallbackReviewers($val)
     {
-		$this->_propDict["fallbackReviewers"] = $val;
+        $this->_propDict["fallbackReviewers"] = $val;
         return $this;
     }
     
     /**
     * Gets the instanceEnumerationScope
-    * In the case of a review of guest users across all Microsoft 365 groups, this determines the scope of which groups will be reviewed. Each group will become a unique accessReviewInstance of the access review series.  For supported scopes, see accessReviewScope.
+    * This property is required when scoping a review to guest users' access across all Microsoft 365 groups and determines which Microsoft 365 groups are reviewed. Each group will become a unique accessReviewInstance of the access review series.  For supported scopes, see accessReviewScope. Supports $select. For examples of options for configuring instanceEnumerationScope, see Configure the scope of your access review definition using the Microsoft Graph API.
     *
-    * @return AccessReviewScope The instanceEnumerationScope
+    * @return AccessReviewScope|null The instanceEnumerationScope
     */
     public function getInstanceEnumerationScope()
     {
         if (array_key_exists("instanceEnumerationScope", $this->_propDict)) {
-            if (is_a($this->_propDict["instanceEnumerationScope"], "\Microsoft\Graph\Model\AccessReviewScope")) {
+            if (is_a($this->_propDict["instanceEnumerationScope"], "\Microsoft\Graph\Model\AccessReviewScope") || is_null($this->_propDict["instanceEnumerationScope"])) {
                 return $this->_propDict["instanceEnumerationScope"];
             } else {
                 $this->_propDict["instanceEnumerationScope"] = new AccessReviewScope($this->_propDict["instanceEnumerationScope"]);
@@ -226,7 +228,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the instanceEnumerationScope
-    * In the case of a review of guest users across all Microsoft 365 groups, this determines the scope of which groups will be reviewed. Each group will become a unique accessReviewInstance of the access review series.  For supported scopes, see accessReviewScope.
+    * This property is required when scoping a review to guest users' access across all Microsoft 365 groups and determines which Microsoft 365 groups are reviewed. Each group will become a unique accessReviewInstance of the access review series.  For supported scopes, see accessReviewScope. Supports $select. For examples of options for configuring instanceEnumerationScope, see Configure the scope of your access review definition using the Microsoft Graph API.
     *
     * @param AccessReviewScope $val The instanceEnumerationScope
     *
@@ -240,14 +242,14 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Gets the lastModifiedDateTime
-    * Timestamp when review series was last modified.
+    * Timestamp when the access review series was last modified. Supports $select. Read-only.
     *
-    * @return \DateTime The lastModifiedDateTime
+    * @return \DateTime|null The lastModifiedDateTime
     */
     public function getLastModifiedDateTime()
     {
         if (array_key_exists("lastModifiedDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["lastModifiedDateTime"], "\DateTime")) {
+            if (is_a($this->_propDict["lastModifiedDateTime"], "\DateTime") || is_null($this->_propDict["lastModifiedDateTime"])) {
                 return $this->_propDict["lastModifiedDateTime"];
             } else {
                 $this->_propDict["lastModifiedDateTime"] = new \DateTime($this->_propDict["lastModifiedDateTime"]);
@@ -259,7 +261,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the lastModifiedDateTime
-    * Timestamp when review series was last modified.
+    * Timestamp when the access review series was last modified. Supports $select. Read-only.
     *
     * @param \DateTime $val The lastModifiedDateTime
     *
@@ -274,9 +276,9 @@ class AccessReviewScheduleDefinition extends Entity
 
      /** 
      * Gets the reviewers
-    * This collection of access review scopes is used to define who are the reviewers. See accessReviewReviewerScope. Required on create.
+    * This collection of access review scopes is used to define who are the reviewers. The reviewers property is only updatable if individual users are assigned as reviewers. Required on create. Supports $select. For examples of options for assigning reviewers, see Assign reviewers to your access review definition using the Microsoft Graph API.
      *
-     * @return array The reviewers
+     * @return array|null The reviewers
      */
     public function getReviewers()
     {
@@ -289,7 +291,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /** 
     * Sets the reviewers
-    * This collection of access review scopes is used to define who are the reviewers. See accessReviewReviewerScope. Required on create.
+    * This collection of access review scopes is used to define who are the reviewers. The reviewers property is only updatable if individual users are assigned as reviewers. Required on create. Supports $select. For examples of options for assigning reviewers, see Assign reviewers to your access review definition using the Microsoft Graph API.
     *
     * @param AccessReviewReviewerScope $val The reviewers
     *
@@ -297,20 +299,20 @@ class AccessReviewScheduleDefinition extends Entity
     */
     public function setReviewers($val)
     {
-		$this->_propDict["reviewers"] = $val;
+        $this->_propDict["reviewers"] = $val;
         return $this;
     }
     
     /**
     * Gets the scope
-    * Defines scope of users reviewed. For supported scopes, see accessReviewScope. Required on create.
+    * Defines scope of resources to review. For supported scopes, see accessReviewScope. Required on create. Supports $select and $filter (contains only). For examples of options for configuring scope, see Configure the scope of your access review definition using the Microsoft Graph API.
     *
-    * @return AccessReviewScope The scope
+    * @return AccessReviewScope|null The scope
     */
     public function getScope()
     {
         if (array_key_exists("scope", $this->_propDict)) {
-            if (is_a($this->_propDict["scope"], "\Microsoft\Graph\Model\AccessReviewScope")) {
+            if (is_a($this->_propDict["scope"], "\Microsoft\Graph\Model\AccessReviewScope") || is_null($this->_propDict["scope"])) {
                 return $this->_propDict["scope"];
             } else {
                 $this->_propDict["scope"] = new AccessReviewScope($this->_propDict["scope"]);
@@ -322,7 +324,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the scope
-    * Defines scope of users reviewed. For supported scopes, see accessReviewScope. Required on create.
+    * Defines scope of resources to review. For supported scopes, see accessReviewScope. Required on create. Supports $select and $filter (contains only). For examples of options for configuring scope, see Configure the scope of your access review definition using the Microsoft Graph API.
     *
     * @param AccessReviewScope $val The scope
     *
@@ -336,14 +338,14 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Gets the settings
-    * The settings for an access review series, see type definition below.
+    * The settings for an access review series, see type definition below. Supports $select. Required on create.
     *
-    * @return AccessReviewScheduleSettings The settings
+    * @return AccessReviewScheduleSettings|null The settings
     */
     public function getSettings()
     {
         if (array_key_exists("settings", $this->_propDict)) {
-            if (is_a($this->_propDict["settings"], "\Microsoft\Graph\Model\AccessReviewScheduleSettings")) {
+            if (is_a($this->_propDict["settings"], "\Microsoft\Graph\Model\AccessReviewScheduleSettings") || is_null($this->_propDict["settings"])) {
                 return $this->_propDict["settings"];
             } else {
                 $this->_propDict["settings"] = new AccessReviewScheduleSettings($this->_propDict["settings"]);
@@ -355,7 +357,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the settings
-    * The settings for an access review series, see type definition below.
+    * The settings for an access review series, see type definition below. Supports $select. Required on create.
     *
     * @param AccessReviewScheduleSettings $val The settings
     *
@@ -369,9 +371,9 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Gets the status
-    * This read-only field specifies the status of an accessReview. The typical states include Initializing, NotStarted, Starting, InProgress, Completing, Completed, AutoReviewing, and AutoReviewed.
+    * This read-only field specifies the status of an access review. The typical states include Initializing, NotStarted, Starting, InProgress, Completing, Completed, AutoReviewing, and AutoReviewed.  Supports $select, $orderby, and $filter (eq only). Read-only.
     *
-    * @return string The status
+    * @return string|null The status
     */
     public function getStatus()
     {
@@ -384,7 +386,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /**
     * Sets the status
-    * This read-only field specifies the status of an accessReview. The typical states include Initializing, NotStarted, Starting, InProgress, Completing, Completed, AutoReviewing, and AutoReviewed.
+    * This read-only field specifies the status of an access review. The typical states include Initializing, NotStarted, Starting, InProgress, Completing, Completed, AutoReviewing, and AutoReviewed.  Supports $select, $orderby, and $filter (eq only). Read-only.
     *
     * @param string $val The status
     *
@@ -399,9 +401,9 @@ class AccessReviewScheduleDefinition extends Entity
 
      /** 
      * Gets the instances
-    * Set of access reviews instances for this access review series. Access reviews that do not recur will only have one instance; otherwise, there will be an instance for each recurrence.
+    * Set of access reviews instances for this access review series. Access reviews that do not recur will only have one instance; otherwise, there is an instance for each recurrence.
      *
-     * @return array The instances
+     * @return array|null The instances
      */
     public function getInstances()
     {
@@ -414,7 +416,7 @@ class AccessReviewScheduleDefinition extends Entity
     
     /** 
     * Sets the instances
-    * Set of access reviews instances for this access review series. Access reviews that do not recur will only have one instance; otherwise, there will be an instance for each recurrence.
+    * Set of access reviews instances for this access review series. Access reviews that do not recur will only have one instance; otherwise, there is an instance for each recurrence.
     *
     * @param AccessReviewInstance $val The instances
     *
@@ -422,7 +424,7 @@ class AccessReviewScheduleDefinition extends Entity
     */
     public function setInstances($val)
     {
-		$this->_propDict["instances"] = $val;
+        $this->_propDict["instances"] = $val;
         return $this;
     }
     

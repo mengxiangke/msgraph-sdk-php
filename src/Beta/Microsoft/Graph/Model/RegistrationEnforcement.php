@@ -26,13 +26,14 @@ class RegistrationEnforcement extends Entity
 
     /**
     * Gets the authenticationMethodsRegistrationCampaign
+    * Run campaigns to remind users to setup targeted authentication methods.
     *
-    * @return AuthenticationMethodsRegistrationCampaign The authenticationMethodsRegistrationCampaign
+    * @return AuthenticationMethodsRegistrationCampaign|null The authenticationMethodsRegistrationCampaign
     */
     public function getAuthenticationMethodsRegistrationCampaign()
     {
         if (array_key_exists("authenticationMethodsRegistrationCampaign", $this->_propDict)) {
-            if (is_a($this->_propDict["authenticationMethodsRegistrationCampaign"], "\Beta\Microsoft\Graph\Model\AuthenticationMethodsRegistrationCampaign")) {
+            if (is_a($this->_propDict["authenticationMethodsRegistrationCampaign"], "\Beta\Microsoft\Graph\Model\AuthenticationMethodsRegistrationCampaign") || is_null($this->_propDict["authenticationMethodsRegistrationCampaign"])) {
                 return $this->_propDict["authenticationMethodsRegistrationCampaign"];
             } else {
                 $this->_propDict["authenticationMethodsRegistrationCampaign"] = new AuthenticationMethodsRegistrationCampaign($this->_propDict["authenticationMethodsRegistrationCampaign"]);
@@ -44,6 +45,7 @@ class RegistrationEnforcement extends Entity
 
     /**
     * Sets the authenticationMethodsRegistrationCampaign
+    * Run campaigns to remind users to setup targeted authentication methods.
     *
     * @param AuthenticationMethodsRegistrationCampaign $val The value to assign to the authenticationMethodsRegistrationCampaign
     *

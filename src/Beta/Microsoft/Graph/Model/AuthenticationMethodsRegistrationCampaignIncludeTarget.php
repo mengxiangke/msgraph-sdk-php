@@ -25,8 +25,9 @@ class AuthenticationMethodsRegistrationCampaignIncludeTarget extends Entity
 {
     /**
     * Gets the id
+    * The object identifier of an Azure AD user or group.
     *
-    * @return string The id
+    * @return string|null The id
     */
     public function getId()
     {
@@ -39,6 +40,7 @@ class AuthenticationMethodsRegistrationCampaignIncludeTarget extends Entity
 
     /**
     * Sets the id
+    * The object identifier of an Azure AD user or group.
     *
     * @param string $val The value of the id
     *
@@ -51,8 +53,9 @@ class AuthenticationMethodsRegistrationCampaignIncludeTarget extends Entity
     }
     /**
     * Gets the targetedAuthenticationMethod
+    * The authentication method that the user is prompted to register. The value must be microsoftAuthenticator.
     *
-    * @return string The targetedAuthenticationMethod
+    * @return string|null The targetedAuthenticationMethod
     */
     public function getTargetedAuthenticationMethod()
     {
@@ -65,6 +68,7 @@ class AuthenticationMethodsRegistrationCampaignIncludeTarget extends Entity
 
     /**
     * Sets the targetedAuthenticationMethod
+    * The authentication method that the user is prompted to register. The value must be microsoftAuthenticator.
     *
     * @param string $val The value of the targetedAuthenticationMethod
     *
@@ -78,13 +82,14 @@ class AuthenticationMethodsRegistrationCampaignIncludeTarget extends Entity
 
     /**
     * Gets the targetType
+    * The type of the authentication method target. Possible values are: user, group, unknownFutureValue.
     *
-    * @return AuthenticationMethodTargetType The targetType
+    * @return AuthenticationMethodTargetType|null The targetType
     */
     public function getTargetType()
     {
         if (array_key_exists("targetType", $this->_propDict)) {
-            if (is_a($this->_propDict["targetType"], "\Beta\Microsoft\Graph\Model\AuthenticationMethodTargetType")) {
+            if (is_a($this->_propDict["targetType"], "\Beta\Microsoft\Graph\Model\AuthenticationMethodTargetType") || is_null($this->_propDict["targetType"])) {
                 return $this->_propDict["targetType"];
             } else {
                 $this->_propDict["targetType"] = new AuthenticationMethodTargetType($this->_propDict["targetType"]);
@@ -96,6 +101,7 @@ class AuthenticationMethodsRegistrationCampaignIncludeTarget extends Entity
 
     /**
     * Sets the targetType
+    * The type of the authentication method target. Possible values are: user, group, unknownFutureValue.
     *
     * @param AuthenticationMethodTargetType $val The value to assign to the targetType
     *

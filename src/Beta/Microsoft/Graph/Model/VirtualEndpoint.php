@@ -26,10 +26,40 @@ class VirtualEndpoint extends Entity
 {
 
      /** 
+     * Gets the auditEvents
+    * Cloud PC audit event.
+     *
+     * @return array|null The auditEvents
+     */
+    public function getAuditEvents()
+    {
+        if (array_key_exists("auditEvents", $this->_propDict)) {
+           return $this->_propDict["auditEvents"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the auditEvents
+    * Cloud PC audit event.
+    *
+    * @param CloudPcAuditEvent $val The auditEvents
+    *
+    * @return VirtualEndpoint
+    */
+    public function setAuditEvents($val)
+    {
+        $this->_propDict["auditEvents"] = $val;
+        return $this;
+    }
+    
+
+     /** 
      * Gets the cloudPCs
     * Cloud managed virtual desktops.
      *
-     * @return array The cloudPCs
+     * @return array|null The cloudPCs
      */
     public function getCloudPCs()
     {
@@ -50,7 +80,7 @@ class VirtualEndpoint extends Entity
     */
     public function setCloudPCs($val)
     {
-		$this->_propDict["cloudPCs"] = $val;
+        $this->_propDict["cloudPCs"] = $val;
         return $this;
     }
     
@@ -59,7 +89,7 @@ class VirtualEndpoint extends Entity
      * Gets the deviceImages
     * The image resource on cloud PC.
      *
-     * @return array The deviceImages
+     * @return array|null The deviceImages
      */
     public function getDeviceImages()
     {
@@ -80,7 +110,7 @@ class VirtualEndpoint extends Entity
     */
     public function setDeviceImages($val)
     {
-		$this->_propDict["deviceImages"] = $val;
+        $this->_propDict["deviceImages"] = $val;
         return $this;
     }
     
@@ -89,7 +119,7 @@ class VirtualEndpoint extends Entity
      * Gets the onPremisesConnections
     * A defined collection of Azure resource information that can be used to establish on-premises network connectivity for cloud PCs.
      *
-     * @return array The onPremisesConnections
+     * @return array|null The onPremisesConnections
      */
     public function getOnPremisesConnections()
     {
@@ -110,16 +140,16 @@ class VirtualEndpoint extends Entity
     */
     public function setOnPremisesConnections($val)
     {
-		$this->_propDict["onPremisesConnections"] = $val;
+        $this->_propDict["onPremisesConnections"] = $val;
         return $this;
     }
     
 
      /** 
      * Gets the provisioningPolicies
-    * cloud PC provisioning policy.
+    * Cloud PC provisioning policy.
      *
-     * @return array The provisioningPolicies
+     * @return array|null The provisioningPolicies
      */
     public function getProvisioningPolicies()
     {
@@ -132,7 +162,7 @@ class VirtualEndpoint extends Entity
     
     /** 
     * Sets the provisioningPolicies
-    * cloud PC provisioning policy.
+    * Cloud PC provisioning policy.
     *
     * @param CloudPcProvisioningPolicy $val The provisioningPolicies
     *
@@ -140,7 +170,37 @@ class VirtualEndpoint extends Entity
     */
     public function setProvisioningPolicies($val)
     {
-		$this->_propDict["provisioningPolicies"] = $val;
+        $this->_propDict["provisioningPolicies"] = $val;
+        return $this;
+    }
+    
+
+     /** 
+     * Gets the userSettings
+    * Cloud PC user settings.
+     *
+     * @return array|null The userSettings
+     */
+    public function getUserSettings()
+    {
+        if (array_key_exists("userSettings", $this->_propDict)) {
+           return $this->_propDict["userSettings"];
+        } else {
+            return null;
+        }
+    }
+    
+    /** 
+    * Sets the userSettings
+    * Cloud PC user settings.
+    *
+    * @param CloudPcUserSetting $val The userSettings
+    *
+    * @return VirtualEndpoint
+    */
+    public function setUserSettings($val)
+    {
+        $this->_propDict["userSettings"] = $val;
         return $this;
     }
     

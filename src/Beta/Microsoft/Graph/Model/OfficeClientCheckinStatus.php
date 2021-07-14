@@ -25,8 +25,9 @@ class OfficeClientCheckinStatus extends Entity
 {
     /**
     * Gets the appliedPolicies
+    * List of policies delivered to the device as last checkin.
     *
-    * @return string The appliedPolicies
+    * @return string|null The appliedPolicies
     */
     public function getAppliedPolicies()
     {
@@ -39,6 +40,7 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Sets the appliedPolicies
+    * List of policies delivered to the device as last checkin.
     *
     * @param string $val The value of the appliedPolicies
     *
@@ -52,13 +54,14 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Gets the checkinDateTime
+    * Last device check-in time in UTC.
     *
-    * @return \DateTime The checkinDateTime
+    * @return \DateTime|null The checkinDateTime
     */
     public function getCheckinDateTime()
     {
         if (array_key_exists("checkinDateTime", $this->_propDict)) {
-            if (is_a($this->_propDict["checkinDateTime"], "\DateTime")) {
+            if (is_a($this->_propDict["checkinDateTime"], "\DateTime") || is_null($this->_propDict["checkinDateTime"])) {
                 return $this->_propDict["checkinDateTime"];
             } else {
                 $this->_propDict["checkinDateTime"] = new \DateTime($this->_propDict["checkinDateTime"]);
@@ -70,6 +73,7 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Sets the checkinDateTime
+    * Last device check-in time in UTC.
     *
     * @param \DateTime $val The value to assign to the checkinDateTime
     *
@@ -82,8 +86,9 @@ class OfficeClientCheckinStatus extends Entity
     }
     /**
     * Gets the deviceName
+    * Device name trying to check-in.
     *
-    * @return string The deviceName
+    * @return string|null The deviceName
     */
     public function getDeviceName()
     {
@@ -96,6 +101,7 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Sets the deviceName
+    * Device name trying to check-in.
     *
     * @param string $val The value of the deviceName
     *
@@ -108,8 +114,9 @@ class OfficeClientCheckinStatus extends Entity
     }
     /**
     * Gets the devicePlatform
+    * Device platform trying to check-in.
     *
-    * @return string The devicePlatform
+    * @return string|null The devicePlatform
     */
     public function getDevicePlatform()
     {
@@ -122,6 +129,7 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Sets the devicePlatform
+    * Device platform trying to check-in.
     *
     * @param string $val The value of the devicePlatform
     *
@@ -134,8 +142,9 @@ class OfficeClientCheckinStatus extends Entity
     }
     /**
     * Gets the devicePlatformVersion
+    * Device platform version trying to check-in.
     *
-    * @return string The devicePlatformVersion
+    * @return string|null The devicePlatformVersion
     */
     public function getDevicePlatformVersion()
     {
@@ -148,6 +157,7 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Sets the devicePlatformVersion
+    * Device platform version trying to check-in.
     *
     * @param string $val The value of the devicePlatformVersion
     *
@@ -160,8 +170,9 @@ class OfficeClientCheckinStatus extends Entity
     }
     /**
     * Gets the errorMessage
+    * Error message if any associated for the last checkin.
     *
-    * @return string The errorMessage
+    * @return string|null The errorMessage
     */
     public function getErrorMessage()
     {
@@ -174,6 +185,7 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Sets the errorMessage
+    * Error message if any associated for the last checkin.
     *
     * @param string $val The value of the errorMessage
     *
@@ -186,8 +198,9 @@ class OfficeClientCheckinStatus extends Entity
     }
     /**
     * Gets the userId
+    * User identifier using the device.
     *
-    * @return string The userId
+    * @return string|null The userId
     */
     public function getUserId()
     {
@@ -200,6 +213,7 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Sets the userId
+    * User identifier using the device.
     *
     * @param string $val The value of the userId
     *
@@ -212,8 +226,9 @@ class OfficeClientCheckinStatus extends Entity
     }
     /**
     * Gets the userPrincipalName
+    * User principal name using the device.
     *
-    * @return string The userPrincipalName
+    * @return string|null The userPrincipalName
     */
     public function getUserPrincipalName()
     {
@@ -226,6 +241,7 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Sets the userPrincipalName
+    * User principal name using the device.
     *
     * @param string $val The value of the userPrincipalName
     *
@@ -238,8 +254,9 @@ class OfficeClientCheckinStatus extends Entity
     }
     /**
     * Gets the wasSuccessful
+    * If the last checkin was successful.
     *
-    * @return bool The wasSuccessful
+    * @return bool|null The wasSuccessful
     */
     public function getWasSuccessful()
     {
@@ -252,6 +269,7 @@ class OfficeClientCheckinStatus extends Entity
 
     /**
     * Sets the wasSuccessful
+    * If the last checkin was successful.
     *
     * @param bool $val The value of the wasSuccessful
     *
